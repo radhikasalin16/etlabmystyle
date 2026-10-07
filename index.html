@@ -1,0 +1,6459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+>
+
+<title>Student Dashboard</title>
+
+
+<style>
+
+/* =========================================================
+   GLOBAL
+========================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+:root {
+
+    --app-bg: #f6f8fa;
+
+    --surface: #e9eef1;
+
+    --surface-hover: #dfe7eb;
+
+    --dark: #142b3d;
+
+    --text: #142b3d;
+
+    --muted: #647785;
+
+    --accent: #0f9f9a;
+
+    --accent-soft: #d8f0ef;
+
+    --blue: #2675ad;
+
+    --green: #39805f;
+
+    --red: #b34f59;
+
+    --orange: #9a6b32;
+
+    --border: rgba(20,43,61,.08);
+
+}
+
+* {
+
+    box-sizing: border-box;
+
+    margin: 0;
+
+    padding: 0;
+
+}
+
+html,
+body {
+
+    min-height: 100%;
+
+}
+
+body {
+
+    min-height: 100vh;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    background:
+        radial-gradient(
+            circle at 50% 30%,
+            #314958 0,
+            #1e303c 48%,
+            #13212b 100%
+        );
+
+    font-family:
+        "Plus Jakarta Sans",
+        Arial,
+        sans-serif;
+
+    color: var(--text);
+
+    -webkit-font-smoothing: antialiased;
+
+}
+
+button,
+input {
+
+    font-family: inherit;
+
+}
+
+
+/* =========================================================
+   APP FRAME
+========================================================= */
+
+.app {
+
+    width: min(100vw, 390px);
+
+    height: min(100vh, 844px);
+
+    min-height: 650px;
+
+    position: relative;
+
+    overflow: hidden;
+
+    background: var(--app-bg);
+
+    box-shadow:
+        0 28px 70px rgba(0,0,0,.30),
+        0 0 0 1px rgba(255,255,255,.08);
+
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.header {
+
+    height: 132px;
+
+    padding: 22px 20px;
+
+    display: flex;
+
+    align-items: center;
+
+    background: var(--surface);
+
+}
+
+.profile-circle {
+
+    width: 66px;
+
+    height: 66px;
+
+    flex: 0 0 66px;
+
+    border-radius: 50%;
+
+    background: #3d5665;
+
+}
+
+.profile-info {
+
+    margin-left: 13px;
+
+    min-width: 0;
+
+}
+
+.name {
+
+    font-size: 23px;
+
+    line-height: 1.05;
+
+    font-weight: 600;
+
+    letter-spacing: -.55px;
+
+}
+
+.roll {
+
+    margin-top: 7px;
+
+    font-size: 12px;
+
+    line-height: 1;
+
+    color: #536b7a;
+
+    letter-spacing: .9px;
+
+}
+
+.header-boxes {
+
+    margin-left: auto;
+
+    display: flex;
+
+    gap: 9px;
+
+}
+
+.header-box {
+
+    width: 38px;
+
+    height: 30px;
+
+    border-radius: 7px;
+
+    background: var(--dark);
+
+}
+
+
+/* =========================================================
+   MAIN CONTENT
+========================================================= */
+
+.content {
+
+    height: calc(100% - 197px);
+
+    padding: 25px 20px 22px;
+
+    overflow: hidden;
+
+}
+
+
+/* =========================================================
+   TOP ROW
+========================================================= */
+
+.top-row {
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1fr)
+        120px;
+
+    gap: 14px;
+
+}
+
+
+/* =========================================================
+   DATE CARD
+========================================================= */
+
+.date-card {
+
+    height: 119px;
+
+    overflow: hidden;
+
+    border-radius: 17px;
+
+    background: var(--surface);
+
+    border: 1px solid var(--border);
+
+    box-shadow:
+        0 3px 10px rgba(23,42,58,.025);
+
+    position: relative;
+
+}
+
+.date-button {
+
+    width: 100%;
+
+    height: 38px;
+
+    border: 0;
+
+    outline: none;
+
+    background: transparent;
+
+    font-family: inherit;
+
+    color: #536b7a;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    padding: 0 11px;
+
+    font-size: 10px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    text-align: left;
+
+}
+
+.date-button::before {
+
+    content: "▣";
+
+    width: 22px;
+
+    height: 22px;
+
+    border-radius: 7px;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background: var(--accent-soft);
+
+    color: var(--accent);
+
+    font-size: 10px;
+
+    flex: 0 0 22px;
+
+}
+
+.date-button:active {
+
+    opacity: .65;
+
+}
+
+
+/* =========================================================
+   LIVE SUBJECT
+========================================================= */
+
+.live-subject {
+
+    margin: 4px 10px 0;
+
+    width: calc(100% - 20px);
+
+    min-height: 56px;
+
+    padding: 9px 10px;
+
+    border-radius: 13px;
+
+    background:
+        rgba(15,159,154,.08);
+
+    border:
+        1px solid rgba(15,159,154,.14);
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    align-items: center;
+
+    column-gap: 6px;
+
+    row-gap: 4px;
+
+    cursor: pointer;
+
+    font-family: inherit;
+
+    text-align: left;
+
+}
+
+.live-subject:active {
+
+    transform: scale(.97);
+
+}
+
+.live-dot {
+
+    width: 7px;
+
+    height: 7px;
+
+    border-radius: 50%;
+
+    background: #e0525d;
+
+    box-shadow:
+        0 0 0 3px rgba(224,82,93,.12);
+
+    flex: 0 0 7px;
+
+}
+
+.live-label {
+
+    color: #b34f59;
+
+    font-size: 7px;
+
+    font-weight: 800;
+
+    letter-spacing: 1px;
+
+}
+
+.live-name {
+
+    width: 100%;
+
+    color: #173448;
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    line-height: 1.2;
+
+}
+
+.live-code {
+
+    color: #647785;
+
+    font-size: 7px;
+
+    font-weight: 600;
+
+    letter-spacing: .7px;
+
+    text-transform: uppercase;
+
+}
+
+
+/* =========================================================
+   ATTENDANCE
+========================================================= */
+
+.attendance-card {
+
+    height: 119px;
+
+    border-radius: 17px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    background: var(--surface);
+
+    border: 1px solid var(--border);
+
+    cursor: pointer;
+
+}
+
+.attendance-ring {
+
+    width: 74px;
+
+    height: 74px;
+
+    margin-top: 16px;
+
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background:
+        conic-gradient(
+            from -1deg,
+            var(--accent) 0deg 234deg,
+            #d4dddd 234deg 360deg
+        );
+
+}
+
+.attendance-ring::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 56px;
+
+    height: 56px;
+
+    border-radius: 50%;
+
+    background: var(--surface);
+
+}
+
+.attendance-value {
+
+    position: relative;
+
+    z-index: 1;
+
+    font-size: 10px;
+
+    font-weight: 600;
+
+    color: var(--accent);
+
+}
+
+.attendance-text {
+
+    margin-top: 5px;
+
+    font-size: 10px;
+
+    color: #38505f;
+
+}
+
+
+/* =========================================================
+   STATS
+========================================================= */
+
+.stats-row {
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1fr)
+        134px;
+
+    gap: 15px;
+
+    margin-top: 25px;
+
+}
+
+.stats-card {
+
+    height: 123px;
+
+    border-radius: 17px;
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    grid-template-rows: 1fr 1fr;
+
+    padding: 24px 17px;
+
+    background: var(--surface);
+
+    border: 1px solid var(--border);
+
+}
+
+.stat {
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: flex-start;
+
+}
+
+.stat-title {
+
+    margin-bottom: 5px;
+
+    color: #4e9996;
+
+    font-size: 7px;
+
+    line-height: 1;
+
+    font-weight: 700;
+
+    letter-spacing: 1.55px;
+
+}
+
+.stat-value {
+
+    color: #294353;
+
+    font-size: 13px;
+
+    line-height: 1;
+
+    font-weight: 500;
+
+}
+
+.stat-value.green {
+
+    color: var(--green);
+
+}
+
+.stat-value.red {
+
+    color: var(--red);
+
+}
+
+
+/* =========================================================
+   MISSION / VISION
+========================================================= */
+
+.mission-vision {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 19px;
+
+    padding-top: 13px;
+
+}
+
+.mission,
+.vision {
+
+    width: 134px;
+
+    height: 39px;
+
+    border-radius: 21px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    color: #1b3446;
+
+    font-size: 13px;
+
+    font-weight: 500;
+
+    background: var(--surface);
+
+    border: 1px solid var(--border);
+
+}
+
+
+/* =========================================================
+   QUICK MENU
+========================================================= */
+
+.quick-menu {
+
+    margin-top: 25px;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 16px 8px;
+
+}
+
+.menu-box {
+
+    height: 88px;
+
+    border-radius: 18px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 9px;
+
+    padding: 8px;
+
+    text-align: center;
+
+    color: #173448;
+
+    background: rgba(255,255,255,.72);
+
+    border: 1px solid rgba(20,43,61,.07);
+
+    box-shadow:
+        0 7px 18px rgba(20,43,61,.045);
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+}
+
+.menu-box:active {
+
+    transform: scale(.97);
+
+}
+
+.menu-icon {
+
+    width: 36px;
+
+    height: 36px;
+
+    border-radius: 12px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 18px;
+
+    font-weight: 700;
+
+}
+
+.academic-icon {
+
+    background: #d8f0ef;
+
+    color: #0f8581;
+
+}
+
+.fees-icon {
+
+    background: #e9e1f5;
+
+    color: #7657a3;
+
+}
+
+.info-icon {
+
+    background: #e3edf7;
+
+    color: #2675ad;
+
+}
+
+.office-icon {
+
+    background: #f3e8d8;
+
+    color: #9a6b32;
+
+}
+
+.placement-icon {
+
+    background: #e1efe6;
+
+    color: #39805f;
+
+}
+
+.menu-box:nth-child(4) {
+
+    grid-column: 1;
+
+    transform: translateX(35px);
+
+}
+
+.menu-box:nth-child(5) {
+
+    grid-column: 2;
+
+    transform: translateX(35px);
+
+}
+
+
+/* =========================================================
+   BOTTOM NAVIGATION
+========================================================= */
+
+.bottom-nav {
+
+    position: absolute;
+
+    left: 0;
+
+    bottom: 0;
+
+    width: 100%;
+
+    height: 65px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 6px 18px 7px;
+
+    background: var(--surface);
+
+    border-top:
+        1px solid rgba(0,0,0,.035);
+
+}
+
+.nav-item {
+
+    min-width: 62px;
+
+    height: 54px;
+
+    padding: 5px 7px;
+
+    border: 0;
+
+    outline: 0;
+
+    border-radius: 15px;
+
+    background: transparent;
+
+    color: #71828d;
+
+    font-family: inherit;
+
+    font-size: 9px;
+
+    font-weight: 700;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 4px;
+
+    cursor: pointer;
+
+}
+
+.nav-icon {
+
+    width: 31px;
+
+    height: 31px;
+
+    border-radius: 10px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 17px;
+
+    font-weight: 700;
+
+}
+
+.nav-item:not(.active) .nav-icon {
+
+    background: #edf1f3;
+
+    color: #536b7a;
+
+}
+
+.nav-item.active {
+
+    color: #0f8581;
+
+}
+
+.nav-item.active .nav-icon {
+
+    background: #d8f0ef;
+
+    color: #0f8581;
+
+}
+
+.profile-nav-icon {
+
+    font-family: Arial, sans-serif;
+
+    font-size: 21px;
+
+    font-weight: 400 !important;
+
+}
+
+
+/* =========================================================
+   CALENDAR PAGE
+========================================================= */
+
+.calendar-page {
+
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 40;
+
+    padding: 22px 20px;
+
+    background: var(--app-bg);
+
+    transform: translateX(100%);
+
+    transition:
+        transform .32s cubic-bezier(.22,.8,.25,1);
+
+    overflow-y: auto;
+
+}
+
+.calendar-page.open {
+
+    transform: translateX(0);
+
+}
+
+.calendar-header {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 13px;
+
+    margin-bottom: 24px;
+
+}
+
+.calendar-back {
+
+    width: 38px;
+
+    height: 38px;
+
+    border: 0;
+
+    border-radius: 12px;
+
+    background: var(--surface);
+
+    color: var(--dark);
+
+    font-size: 27px;
+
+    cursor: pointer;
+
+}
+
+.calendar-title {
+
+    color: var(--text);
+
+    font-size: 21px;
+
+    font-weight: 700;
+
+}
+
+.calendar-subtitle {
+
+    margin-top: 3px;
+
+    color: var(--muted);
+
+    font-size: 10px;
+
+    font-weight: 600;
+
+}
+
+.calendar-card,
+.selected-date-card {
+
+    background: var(--surface);
+
+    border: 1px solid var(--border);
+
+    border-radius: 19px;
+
+}
+
+.calendar-card {
+
+    padding: 18px 14px 16px;
+
+}
+
+.calendar-month {
+
+    display: flex;
+
+    align-items: baseline;
+
+    gap: 6px;
+
+    margin: 2px 4px 17px;
+
+}
+
+.calendar-month span {
+
+    font-size: 17px;
+
+    font-weight: 700;
+
+}
+
+.calendar-month strong {
+
+    color: var(--muted);
+
+    font-size: 11px;
+
+}
+
+.calendar-weekdays,
+.calendar-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(7,1fr);
+
+    text-align: center;
+
+}
+
+.calendar-weekdays {
+
+    margin-bottom: 9px;
+
+    color: var(--muted);
+
+    font-size: 8px;
+
+    font-weight: 700;
+
+}
+
+.calendar-grid {
+
+    row-gap: 7px;
+
+}
+
+.calendar-day {
+
+    width: 31px;
+
+    height: 31px;
+
+    margin: auto;
+
+    border: 0;
+
+    border-radius: 10px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    color: #294353;
+
+    background: transparent;
+
+    font-family: inherit;
+
+    font-size: 9px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+}
+
+.calendar-day.muted {
+
+    color: #a5b1b8;
+
+}
+
+.calendar-day.selected {
+
+    background: var(--accent);
+
+    color: white;
+
+}
+
+.selected-date-card {
+
+    margin-top: 16px;
+
+    padding: 17px;
+
+}
+
+.selected-date-label {
+
+    color: #4e9996;
+
+    font-size: 7px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.4px;
+
+}
+
+.selected-date {
+
+    margin-top: 7px;
+
+    color: var(--text);
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+}
+
+.calendar-live {
+
+    margin-top: 12px;
+
+    padding-top: 11px;
+
+    border-top:
+        1px solid rgba(20,43,61,.07);
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    color: var(--muted);
+
+    font-size: 9px;
+
+}
+
+
+/* =========================================================
+   TIMETABLE
+========================================================= */
+
+.timetable-overlay {
+
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 60;
+
+    background:
+        rgba(10,25,35,.48);
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    transition:
+        opacity .3s ease,
+        visibility .3s ease;
+
+}
+
+.timetable-overlay.open {
+
+    opacity: 1;
+
+    visibility: visible;
+
+}
+
+.timetable-sheet {
+
+    position: absolute;
+
+    left: 0;
+
+    right: 0;
+
+    bottom: 0;
+
+    max-height: 82%;
+
+    padding: 12px 18px 24px;
+
+    background: #f6f8fa;
+
+    border-radius:
+        25px 25px 0 0;
+
+    transform: translateY(105%);
+
+    transition:
+        transform .38s cubic-bezier(.22,.8,.25,1);
+
+    overflow-y: auto;
+
+}
+
+.timetable-overlay.open .timetable-sheet {
+
+    transform: translateY(0);
+
+}
+
+.sheet-handle {
+
+    width: 42px;
+
+    height: 5px;
+
+    margin: 0 auto 17px;
+
+    border-radius: 10px;
+
+    background: #cbd4d8;
+
+}
+
+.timetable-header {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin-bottom: 18px;
+
+}
+
+.timetable-title {
+
+    color: var(--text);
+
+    font-size: 20px;
+
+    font-weight: 700;
+
+}
+
+.timetable-date {
+
+    margin-top: 4px;
+
+    color: var(--muted);
+
+    font-size: 10px;
+
+}
+
+.close-timetable {
+
+    width: 38px;
+
+    height: 38px;
+
+    border: 0;
+
+    border-radius: 12px;
+
+    background: #e9eef1;
+
+    font-size: 23px;
+
+}
+
+.current-class {
+
+    margin-bottom: 17px;
+
+    padding: 13px 14px;
+
+    border-radius: 16px;
+
+    background: #d8f0ef;
+
+}
+
+.current-label {
+
+    color: #b34f59;
+
+    font-size: 7px;
+
+    font-weight: 800;
+
+    letter-spacing: 1px;
+
+}
+
+.current-subject {
+
+    margin-top: 6px;
+
+    color: #173448;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+}
+
+.current-room {
+
+    margin-top: 3px;
+
+    color: #647785;
+
+    font-size: 9px;
+
+}
+
+.timetable-list {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 9px;
+
+}
+
+.timetable-item {
+
+    min-height: 66px;
+
+    display: grid;
+
+    grid-template-columns:
+        66px
+        minmax(0,1fr)
+        auto;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 10px 11px;
+
+    border-radius: 15px;
+
+    background: white;
+
+    border:
+        1px solid rgba(20,43,61,.07);
+
+}
+
+.timetable-item.current {
+
+    border:
+        1px solid rgba(15,159,154,.28);
+
+}
+
+.time {
+
+    color: #4e9996;
+
+    font-size: 8px;
+
+    font-weight: 800;
+
+    line-height: 1.4;
+
+}
+
+.subject-name {
+
+    color: #173448;
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+}
+
+.subject-code {
+
+    margin-top: 3px;
+
+    color: #82909a;
+
+    font-size: 7px;
+
+}
+
+.room {
+
+    padding: 5px 7px;
+
+    border-radius: 8px;
+
+    background: #edf1f3;
+
+    color: #536b7a;
+
+    font-size: 7px;
+
+}
+
+
+/* =========================================================
+   ATTENDANCE PAGE
+========================================================= */
+
+.attendance-page {
+
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 50;
+
+    padding: 22px 20px;
+
+    background: var(--app-bg);
+
+    transform: translateX(100%);
+
+    transition:
+        transform .32s cubic-bezier(.22,.8,.25,1);
+
+    overflow-y: auto;
+
+}
+
+.attendance-page.open {
+
+    transform: translateX(0);
+
+}
+
+.attendance-page-header {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 13px;
+
+    margin-bottom: 20px;
+
+}
+
+.attendance-page-back {
+
+    width: 38px;
+
+    height: 38px;
+
+    border: 0;
+
+    border-radius: 12px;
+
+    background: var(--surface);
+
+    color: var(--dark);
+
+    font-size: 27px;
+
+}
+
+.attendance-page-title {
+
+    font-size: 21px;
+
+    font-weight: 700;
+
+}
+
+.attendance-page-subtitle {
+
+    margin-top: 3px;
+
+    color: var(--muted);
+
+    font-size: 10px;
+
+}
+
+.attendance-switch {
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 5px;
+
+    padding: 5px;
+
+    margin-bottom: 16px;
+
+    background: #e8eef0;
+
+    border-radius: 13px;
+
+}
+
+.attendance-switch button {
+
+    height: 35px;
+
+    border: 0;
+
+    border-radius: 10px;
+
+    background: transparent;
+
+    color: var(--muted);
+
+    font-size: 9px;
+
+    font-weight: 700;
+
+}
+
+.attendance-switch button.active {
+
+    background: var(--surface);
+
+    color: var(--accent);
+
+}
+
+.attendance-summary {
+
+    display: grid;
+
+    grid-template-columns: repeat(3,1fr);
+
+    gap: 7px;
+
+    margin-bottom: 13px;
+
+}
+
+.attendance-summary-card {
+
+    padding: 12px 8px;
+
+    background: var(--surface);
+
+    border: 1px solid var(--border);
+
+    border-radius: 15px;
+
+    text-align: center;
+
+}
+
+.attendance-summary-value {
+
+    font-size: 15px;
+
+    font-weight: 800;
+
+}
+
+.attendance-summary-label {
+
+    margin-top: 3px;
+
+    color: var(--muted);
+
+    font-size: 7px;
+
+    font-weight: 700;
+
+}
+
+.attendance-section-title {
+
+    margin: 17px 2px 9px;
+
+    color: var(--text);
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+}
+
+.attendance-subject-card {
+
+    padding: 14px;
+
+    margin-bottom: 9px;
+
+    background: var(--surface);
+
+    border: 1px solid var(--border);
+
+    border-radius: 17px;
+
+}
+
+.attendance-subject-top {
+
+    display: flex;
+
+    align-items: flex-start;
+
+    justify-content: space-between;
+
+}
+
+.attendance-subject-name {
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+}
+
+.attendance-subject-code {
+
+    margin-top: 3px;
+
+    color: var(--muted);
+
+    font-size: 7px;
+
+}
+
+.attendance-subject-percent {
+
+    color: var(--accent);
+
+    font-size: 14px;
+
+    font-weight: 800;
+
+}
+
+.attendance-progress {
+
+    height: 6px;
+
+    margin: 11px 0 12px;
+
+    background: #dfe7e9;
+
+    border-radius: 20px;
+
+    overflow: hidden;
+
+}
+
+.attendance-progress span {
+
+    display: block;
+
+    height: 100%;
+
+    background: var(--accent);
+
+}
+
+.attendance-subject-details {
+
+    display: grid;
+
+    grid-template-columns: repeat(3,1fr);
+
+    gap: 6px;
+
+}
+
+.attendance-detail {
+
+    padding: 8px 5px;
+
+    background: #f4f7f8;
+
+    border-radius: 10px;
+
+    text-align: center;
+
+}
+
+.attendance-detail strong {
+
+    display: block;
+
+    font-size: 9px;
+
+}
+
+.attendance-detail span {
+
+    display: block;
+
+    margin-top: 3px;
+
+    color: var(--muted);
+
+    font-size: 6px;
+
+}
+
+
+/* =========================================================
+   ATTENDANCE DAY
+========================================================= */
+
+.attendance-day-card {
+
+    padding: 16px 13px;
+
+    background: var(--surface);
+
+    border: 1px solid var(--border);
+
+    border-radius: 19px;
+
+}
+
+.attendance-day-month {
+
+    display: flex;
+
+    align-items: baseline;
+
+    gap: 6px;
+
+    margin: 2px 4px 17px;
+
+}
+
+.attendance-day-month span {
+
+    font-size: 17px;
+
+    font-weight: 700;
+
+}
+
+.attendance-day-month strong {
+
+    color: var(--muted);
+
+    font-size: 11px;
+
+}
+
+.attendance-weekdays,
+.attendance-day-grid {
+
+    display: grid;
+
+    grid-template-columns: repeat(7,1fr);
+
+    text-align: center;
+
+}
+
+.attendance-weekdays {
+
+    margin-bottom: 9px;
+
+    color: var(--muted);
+
+    font-size: 8px;
+
+    font-weight: 700;
+
+}
+
+.attendance-day-grid {
+
+    row-gap: 8px;
+
+}
+
+.attendance-day {
+
+    width: 31px;
+
+    height: 38px;
+
+    margin: auto;
+
+    border: 0;
+
+    border-radius: 10px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 3px;
+
+    background: transparent;
+
+    color: #294353;
+
+    font-size: 9px;
+
+    font-weight: 600;
+
+}
+
+.attendance-day.selected {
+
+    background: #edf5f5;
+
+}
+
+.attendance-mark {
+
+    width: 5px;
+
+    height: 5px;
+
+    border-radius: 50%;
+
+    background: #aab5ba;
+
+}
+
+.attendance-day.present .attendance-mark {
+
+    background: #22a06b;
+
+}
+
+.attendance-day.absent .attendance-mark {
+
+    background: #dc5c5c;
+
+}
+
+.attendance-day.duty .attendance-mark {
+
+    background: #d19a35;
+
+}
+
+.attendance-day-info {
+
+    margin-top: 13px;
+
+    padding: 13px;
+
+    background: var(--surface);
+
+    border: 1px solid var(--border);
+
+    border-radius: 15px;
+
+}
+
+.attendance-day-info-label {
+
+    color: #4e9996;
+
+    font-size: 7px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.2px;
+
+}
+
+.attendance-day-info-date {
+
+    margin-top: 5px;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+}
+
+.attendance-day-info-status {
+
+    margin-top: 4px;
+
+    color: var(--muted);
+
+    font-size: 9px;
+
+}
+
+
+/* =========================================================
+   HOURLY ATTENDANCE
+========================================================= */
+
+.attendance-hourly-card {
+
+    margin-top: 13px;
+
+    padding: 14px;
+
+    background: var(--surface);
+
+    border: 1px solid var(--border);
+
+    border-radius: 17px;
+
+}
+
+.attendance-hourly-title {
+
+    margin-bottom: 10px;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+}
+
+.attendance-hourly-list {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+
+}
+
+.attendance-hourly-item {
+
+    display: grid;
+
+    grid-template-columns:
+        61px
+        minmax(0,1fr)
+        auto;
+
+    align-items: center;
+
+    gap: 8px;
+
+    min-height: 54px;
+
+    padding: 9px 10px;
+
+    border-radius: 13px;
+
+    background: white;
+
+    border:
+        1px solid rgba(20,43,61,.06);
+
+}
+
+.attendance-hourly-time {
+
+    color: #4e9996;
+
+    font-size: 7px;
+
+    font-weight: 800;
+
+}
+
+.attendance-hourly-subject {
+
+    color: #173448;
+
+    font-size: 9px;
+
+    font-weight: 700;
+
+}
+
+.attendance-hourly-code {
+
+    margin-top: 2px;
+
+    color: #82909a;
+
+    font-size: 6px;
+
+}
+
+.attendance-hourly-status {
+
+    padding: 6px 7px;
+
+    border-radius: 8px;
+
+    font-size: 6px;
+
+    font-weight: 800;
+
+    white-space: nowrap;
+
+}
+
+.attendance-hourly-status.present {
+
+    background: #e1efe6;
+
+    color: #39805f;
+
+}
+
+.attendance-hourly-status.absent {
+
+    background: #f6e3e5;
+
+    color: #b34f59;
+
+}
+
+.attendance-hourly-status.duty {
+
+    background: #f4ead7;
+
+    color: #9a6b32;
+
+}
+
+.attendance-hourly-status.no-class {
+
+    background: #edf1f3;
+
+    color: #71828d;
+
+}
+
+.attendance-legend {
+
+    display: flex;
+
+    justify-content: center;
+
+    flex-wrap: wrap;
+
+    gap: 13px;
+
+    margin-top: 15px;
+
+    color: var(--muted);
+
+    font-size: 7px;
+
+    font-weight: 700;
+
+}
+
+.attendance-legend-item {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 5px;
+
+}
+
+.attendance-legend-dot {
+
+    width: 7px;
+
+    height: 7px;
+
+    border-radius: 50%;
+
+}
+
+.attendance-legend-dot.present {
+
+    background: #22a06b;
+
+}
+
+.attendance-legend-dot.absent {
+
+    background: #dc5c5c;
+
+}
+
+.attendance-legend-dot.duty {
+
+    background: #d19a35;
+
+}
+
+.attendance-view.hidden {
+
+    display: none;
+
+}
+
+
+/* =========================================================
+   MENU PANEL
+========================================================= */
+
+.menu-panel-overlay {
+
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 70;
+
+    pointer-events: none;
+
+    background: rgba(15,29,40,.18);
+
+    opacity: 0;
+
+    transition: opacity .25s ease;
+
+}
+
+.menu-panel-overlay.open {
+
+    pointer-events: auto;
+
+    opacity: 1;
+
+}
+
+.menu-panel {
+
+    position: absolute;
+
+    left: 0;
+
+    top: 0;
+
+    bottom: 0;
+
+    width: 78%;
+
+    max-width: 305px;
+
+    padding: 28px 18px 90px;
+
+    background: var(--surface);
+
+    box-shadow:
+        10px 0 30px rgba(20,43,61,.12);
+
+    transform: translateX(-100%);
+
+    transition:
+        transform .3s ease;
+
+    overflow-y: auto;
+
+}
+
+.menu-panel-overlay.open .menu-panel {
+
+    transform: translateX(0);
+
+}
+
+.menu-panel-title {
+
+    font-size: 21px;
+
+    font-weight: 800;
+
+    margin-bottom: 6px;
+
+}
+
+.menu-panel-subtitle {
+
+    font-size: 12px;
+
+    color: #71818d;
+
+    margin-bottom: 22px;
+
+}
+
+.menu-category-button {
+
+    width: 100%;
+
+    min-height: 55px;
+
+    border: 1px solid rgba(20,43,61,.07);
+
+    border-radius: 15px;
+
+    background: rgba(255,255,255,.78);
+
+    color: #173448;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 13px;
+
+    padding: 11px 14px;
+
+    margin-bottom: 10px;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    text-align: left;
+
+    cursor: pointer;
+
+}
+
+.menu-category-icon {
+
+    width: 34px;
+
+    height: 34px;
+
+    border-radius: 11px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    flex: 0 0 34px;
+
+}
+
+
+/* =========================================================
+   CATEGORY SHEET
+========================================================= */
+
+.category-sheet-overlay {
+
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 80;
+
+    pointer-events: none;
+
+    background: rgba(15,29,40,.15);
+
+    opacity: 0;
+
+    transition: opacity .25s ease;
+
+}
+
+.category-sheet-overlay.open {
+
+    pointer-events: auto;
+
+    opacity: 1;
+
+}
+
+.category-sheet {
+
+    position: absolute;
+
+    left: 0;
+
+    right: 0;
+
+    bottom: 0;
+
+    max-height: 76%;
+
+    padding: 18px 18px 86px;
+
+    background: var(--surface);
+
+    border-radius:
+        25px 25px 0 0;
+
+    box-shadow:
+        0 -10px 30px rgba(20,43,61,.12);
+
+    transform: translateY(100%);
+
+    transition:
+        transform .3s ease;
+
+    overflow-y: auto;
+
+}
+
+.category-sheet-overlay.open .category-sheet {
+
+    transform: translateY(0);
+
+}
+
+.category-sheet-title {
+
+    font-size: 20px;
+
+    font-weight: 800;
+
+    margin-bottom: 15px;
+
+}
+
+.category-items {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2,minmax(0,1fr));
+
+    gap: 10px;
+
+}
+
+.category-item {
+
+    min-height: 52px;
+
+    border: 1px solid rgba(20,43,61,.07);
+
+    border-radius: 14px;
+
+    background: rgba(255,255,255,.78);
+
+    color: #173448;
+
+    padding: 10px;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    text-align: left;
+
+    cursor: pointer;
+
+}
+
+
+/* =========================================================
+   =========================================================
+   EVALUATIONS PAGE
+   =========================================================
+========================================================= */
+
+.evaluations-page {
+
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 90;
+
+    background: var(--app-bg);
+
+    transform: translateX(100%);
+
+    transition:
+        transform .32s cubic-bezier(.22,.8,.25,1);
+
+    overflow-y: auto;
+
+    padding: 22px 20px 90px;
+
+}
+
+.evaluations-page.open {
+
+    transform: translateX(0);
+
+}
+
+
+/* =========================================================
+   EVALUATIONS HEADER
+========================================================= */
+
+.evaluations-header {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 13px;
+
+    margin-bottom: 18px;
+
+}
+
+.evaluations-back {
+
+    width: 38px;
+
+    height: 38px;
+
+    flex: 0 0 38px;
+
+    border: 0;
+
+    border-radius: 12px;
+
+    background: var(--surface);
+
+    color: var(--dark);
+
+    font-size: 27px;
+
+    line-height: 1;
+
+    cursor: pointer;
+
+}
+
+.evaluations-back:active {
+
+    transform: scale(.92);
+
+}
+
+.evaluations-title {
+
+    color: var(--text);
+
+    font-size: 21px;
+
+    font-weight: 800;
+
+    letter-spacing: -.4px;
+
+}
+
+.evaluations-subtitle {
+
+    margin-top: 3px;
+
+    color: var(--muted);
+
+    font-size: 9px;
+
+    font-weight: 600;
+
+}
+
+
+/* =========================================================
+   EVALUATION SUMMARY
+========================================================= */
+
+.evaluation-summary {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap: 7px;
+
+    margin-bottom: 14px;
+
+}
+
+.evaluation-summary-card {
+
+    padding: 12px 6px;
+
+    border-radius: 15px;
+
+    background: var(--surface);
+
+    border: 1px solid var(--border);
+
+    text-align: center;
+
+}
+
+.evaluation-summary-value {
+
+    font-size: 17px;
+
+    font-weight: 800;
+
+}
+
+.evaluation-summary-value.total {
+
+    color: var(--text);
+
+}
+
+.evaluation-summary-value.submitted {
+
+    color: var(--green);
+
+}
+
+.evaluation-summary-value.pending {
+
+    color: var(--red);
+
+}
+
+.evaluation-summary-label {
+
+    margin-top: 4px;
+
+    color: var(--muted);
+
+    font-size: 6px;
+
+    font-weight: 800;
+
+    letter-spacing: .5px;
+
+}
+
+
+/* =========================================================
+   EVALUATION FILTERS
+========================================================= */
+
+.evaluation-filter-title {
+
+    margin: 5px 0 8px 2px;
+
+    color: var(--text);
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+}
+
+.evaluation-filters {
+
+    display: flex;
+
+    gap: 6px;
+
+    overflow-x: auto;
+
+    padding-bottom: 3px;
+
+    scrollbar-width: none;
+
+}
+
+.evaluation-filters::-webkit-scrollbar {
+
+    display: none;
+
+}
+
+.evaluation-filter {
+
+    flex: 0 0 auto;
+
+    height: 31px;
+
+    padding: 0 12px;
+
+    border: 0;
+
+    border-radius: 10px;
+
+    background: #e5ecef;
+
+    color: #647785;
+
+    font-size: 8px;
+
+    font-weight: 800;
+
+    cursor: pointer;
+
+}
+
+.evaluation-filter.active {
+
+    background: var(--accent);
+
+    color: white;
+
+}
+
+
+/* =========================================================
+   ASSIGNMENT LIST HEADER
+========================================================= */
+
+.assignment-list-heading {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin: 17px 2px 9px;
+
+}
+
+.assignment-list-title {
+
+    color: var(--text);
+
+    font-size: 12px;
+
+    font-weight: 800;
+
+}
+
+.assignment-count {
+
+    color: var(--muted);
+
+    font-size: 7px;
+
+    font-weight: 700;
+
+}
+
+
+/* =========================================================
+   ASSIGNMENT CARD
+========================================================= */
+
+.assignment-card {
+
+    padding: 13px;
+
+    margin-bottom: 9px;
+
+    border-radius: 17px;
+
+    background: var(--surface);
+
+    border: 1px solid var(--border);
+
+}
+
+.assignment-top {
+
+    display: flex;
+
+    align-items: flex-start;
+
+    justify-content: space-between;
+
+    gap: 8px;
+
+}
+
+.assignment-main {
+
+    min-width: 0;
+
+}
+
+.assignment-subject {
+
+    color: #4e9996;
+
+    font-size: 7px;
+
+    font-weight: 800;
+
+    letter-spacing: .8px;
+
+    text-transform: uppercase;
+
+}
+
+.assignment-name {
+
+    margin-top: 4px;
+
+    color: var(--text);
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    line-height: 1.35;
+
+}
+
+.assignment-code {
+
+    margin-top: 3px;
+
+    color: var(--muted);
+
+    font-size: 7px;
+
+    font-weight: 700;
+
+}
+
+
+/* =========================================================
+   ASSIGNMENT STATUS
+========================================================= */
+
+.assignment-status {
+
+    flex: 0 0 auto;
+
+    padding: 6px 8px;
+
+    border-radius: 9px;
+
+    font-size: 6px;
+
+    font-weight: 800;
+
+    white-space: nowrap;
+
+}
+
+.assignment-status.submitted {
+
+    background: #e1efe6;
+
+    color: #39805f;
+
+}
+
+.assignment-status.not-submitted {
+
+    background: #f6e3e5;
+
+    color: #b34f59;
+
+}
+
+
+/* =========================================================
+   ASSIGNMENT DETAILS
+========================================================= */
+
+.assignment-details {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    margin-top: 10px;
+
+    padding-top: 9px;
+
+    border-top:
+        1px solid rgba(20,43,61,.07);
+
+}
+
+.assignment-due {
+
+    color: var(--muted);
+
+    font-size: 7px;
+
+    font-weight: 700;
+
+}
+
+.assignment-due strong {
+
+    color: var(--text);
+
+}
+
+.assignment-file-name {
+
+    min-width: 0;
+
+    flex: 1;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
+
+    color: #39805f;
+
+    font-size: 7px;
+
+    font-weight: 700;
+
+}
+
+
+/* =========================================================
+   ASSIGNMENT ACTIONS
+========================================================= */
+
+.assignment-actions {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    margin-top: 10px;
+
+}
+
+.assignment-upload {
+
+    position: relative;
+
+    flex: 1;
+
+    height: 34px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 10px;
+
+    background: #edf1f3;
+
+    color: #536b7a;
+
+    font-size: 7px;
+
+    font-weight: 800;
+
+    cursor: pointer;
+
+    overflow: hidden;
+
+}
+
+.assignment-upload input {
+
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+
+    height: 100%;
+
+    opacity: 0;
+
+    cursor: pointer;
+
+}
+
+.assignment-submit {
+
+    height: 34px;
+
+    padding: 0 13px;
+
+    border: 0;
+
+    border-radius: 10px;
+
+    background: var(--accent);
+
+    color: white;
+
+    font-size: 7px;
+
+    font-weight: 800;
+
+    cursor: pointer;
+
+}
+
+.assignment-submit:active {
+
+    transform: scale(.96);
+
+}
+
+.assignment-submit:disabled {
+
+    background: #cbd5d8;
+
+    color: #72828b;
+
+    cursor: default;
+
+}
+
+
+/* =========================================================
+   EMPTY ASSIGNMENTS
+========================================================= */
+
+.assignment-empty {
+
+    padding: 28px 15px;
+
+    border-radius: 17px;
+
+    background: var(--surface);
+
+    border: 1px solid var(--border);
+
+    text-align: center;
+
+}
+
+.assignment-empty-icon {
+
+    width: 42px;
+
+    height: 42px;
+
+    margin: 0 auto 9px;
+
+    border-radius: 13px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background: #e1efe6;
+
+    color: #39805f;
+
+    font-size: 18px;
+
+    font-weight: 800;
+
+}
+
+.assignment-empty-title {
+
+    color: var(--text);
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+}
+
+.assignment-empty-text {
+
+    margin-top: 4px;
+
+    color: var(--muted);
+
+    font-size: 8px;
+
+    line-height: 1.5;
+
+}
+
+
+/* =========================================================
+   EVALUATION NOTICE
+========================================================= */
+
+.evaluation-notice {
+
+    margin-top: 14px;
+
+    padding: 12px;
+
+    border-radius: 14px;
+
+    background: #edf5f5;
+
+    border:
+        1px solid rgba(15,159,154,.10);
+
+    color: #536b7a;
+
+    font-size: 7px;
+
+    line-height: 1.55;
+
+}
+
+.evaluation-notice strong {
+
+    color: #173448;
+
+}
+
+
+/* =========================================================
+   SMALL SCREEN
+========================================================= */
+
+@media (max-width: 350px) {
+
+    body {
+
+        background: var(--app-bg);
+
+    }
+
+    .app {
+
+        width: 100vw;
+
+        height: 100vh;
+
+        box-shadow: none;
+
+    }
+
+    .content {
+
+        padding-left: 16px;
+
+        padding-right: 16px;
+
+    }
+
+    .menu-box:nth-child(4),
+    .menu-box:nth-child(5) {
+
+        transform:
+            translateX(27px);
+
+    }
+
+    .attendance-hourly-item {
+
+        grid-template-columns:
+            55px
+            minmax(0,1fr)
+            auto;
+
+        gap: 6px;
+
+    }
+
+    .assignment-actions {
+
+        gap: 5px;
+
+    }
+
+    .assignment-submit {
+
+        padding: 0 9px;
+
+    }
+
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .calendar-page,
+    .attendance-page,
+    .timetable-overlay,
+    .timetable-sheet,
+    .menu-panel,
+    .menu-panel-overlay,
+    .category-sheet,
+    .category-sheet-overlay,
+    .evaluations-page {
+
+        transition: none;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="app">
+
+
+<!-- =======================================================
+     MAIN DASHBOARD
+======================================================= -->
+
+<header class="header">
+
+    <div class="profile-circle"></div>
+
+    <div class="profile-info">
+
+        <div class="name">
+            Name
+        </div>
+
+        <div class="roll">
+            roll no: 00
+        </div>
+
+    </div>
+
+    <div class="header-boxes">
+
+        <div class="header-box"></div>
+
+        <div class="header-box"></div>
+
+    </div>
+
+</header>
+
+
+<main class="content">
+
+
+    <section class="top-row">
+
+
+        <div class="date-card">
+
+            <button
+                class="date-button"
+                id="dateButton"
+                type="button"
+            >
+                Saturday 19-06-2026
+            </button>
+
+
+            <button
+                class="live-subject"
+                id="liveSubjectButton"
+                type="button"
+            >
+
+                <span class="live-dot"></span>
+
+                <span class="live-label">
+                    LIVE
+                </span>
+
+                <span class="live-name">
+                    Data Structures
+                </span>
+
+                <span class="live-code">
+                    CS201
+                </span>
+
+            </button>
+
+        </div>
+
+
+        <div
+            class="attendance-card"
+            id="attendanceCard"
+            role="button"
+            tabindex="0"
+        >
+
+            <div class="attendance-ring">
+
+                <span class="attendance-value">
+                    65%
+                </span>
+
+            </div>
+
+            <div class="attendance-text">
+                Attendance
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+    <section class="stats-row">
+
+
+        <div class="stats-card">
+
+            <div class="stat">
+
+                <div class="stat-title">
+                    CGPA
+                </div>
+
+                <div class="stat-value">
+                    7.38
+                </div>
+
+            </div>
+
+
+            <div class="stat">
+
+                <div class="stat-title">
+                    PASSED
+                </div>
+
+                <div class="stat-value green">
+                    15/15
+                </div>
+
+            </div>
+
+
+            <div class="stat">
+
+                <div class="stat-title">
+                    CREDIT
+                </div>
+
+                <div class="stat-value">
+                    20/21
+                </div>
+
+            </div>
+
+
+            <div class="stat">
+
+                <div class="stat-title">
+                    FAILED
+                </div>
+
+                <div class="stat-value red">
+                    0/15
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="mission-vision">
+
+            <div class="mission">
+                Mission
+            </div>
+
+            <div class="vision">
+                Vision
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+    <section class="quick-menu">
+
+
+        <div
+            class="menu-box"
+            data-quick-category="Academics"
+            role="button"
+            tabindex="0"
+        >
+
+            <div class="menu-icon academic-icon">
+                ▣
+            </div>
+
+            <span>
+                Academics
+            </span>
+
+        </div>
+
+
+        <div
+            class="menu-box"
+            data-quick-category="Fees"
+            role="button"
+            tabindex="0"
+        >
+
+            <div class="menu-icon fees-icon">
+                ₹
+            </div>
+
+            <span>
+                Fees
+            </span>
+
+        </div>
+
+
+        <div
+            class="menu-box"
+            data-quick-category="Information"
+            role="button"
+            tabindex="0"
+        >
+
+            <div class="menu-icon info-icon">
+                i
+            </div>
+
+            <span>
+                Information
+            </span>
+
+        </div>
+
+
+        <div
+            class="menu-box"
+            data-quick-category="Office"
+            role="button"
+            tabindex="0"
+        >
+
+            <div class="menu-icon office-icon">
+                ▤
+            </div>
+
+            <span>
+                Office
+            </span>
+
+        </div>
+
+
+        <div
+            class="menu-box"
+            data-quick-category="Placements"
+            role="button"
+            tabindex="0"
+        >
+
+            <div class="menu-icon placement-icon">
+                ↗
+            </div>
+
+            <span>
+                Placements
+            </span>
+
+        </div>
+
+
+    </section>
+
+
+</main>
+
+
+<!-- =======================================================
+     MENU
+======================================================= -->
+
+<div
+    class="menu-panel-overlay"
+    id="menuPanelOverlay"
+>
+
+    <aside class="menu-panel">
+
+
+        <div class="menu-panel-title">
+            Menu
+        </div>
+
+        <div class="menu-panel-subtitle">
+            Choose a section
+        </div>
+
+
+        <button
+            class="menu-category-button"
+            type="button"
+            data-category="Academics"
+        >
+
+            <span class="menu-category-icon academic-icon">
+                ▣
+            </span>
+
+            <span>
+                Academics
+            </span>
+
+        </button>
+
+
+        <button
+            class="menu-category-button"
+            type="button"
+            data-category="Fees"
+        >
+
+            <span class="menu-category-icon fees-icon">
+                ₹
+            </span>
+
+            <span>
+                Fees
+            </span>
+
+        </button>
+
+
+        <button
+            class="menu-category-button"
+            type="button"
+            data-category="Information"
+        >
+
+            <span class="menu-category-icon info-icon">
+                i
+            </span>
+
+            <span>
+                Information
+            </span>
+
+        </button>
+
+
+        <button
+            class="menu-category-button"
+            type="button"
+            data-category="Office"
+        >
+
+            <span class="menu-category-icon office-icon">
+                ▤
+            </span>
+
+            <span>
+                Office
+            </span>
+
+        </button>
+
+
+        <button
+            class="menu-category-button"
+            type="button"
+            data-category="Placements"
+        >
+
+            <span class="menu-category-icon placement-icon">
+                ↗
+            </span>
+
+            <span>
+                Placements
+            </span>
+
+        </button>
+
+
+    </aside>
+
+</div>
+
+
+<!-- =======================================================
+     CATEGORY SHEET
+======================================================= -->
+
+<div
+    class="category-sheet-overlay"
+    id="categorySheetOverlay"
+>
+
+    <section class="category-sheet">
+
+        <div class="sheet-handle"></div>
+
+        <div
+            class="category-sheet-title"
+            id="categorySheetTitle"
+        ></div>
+
+        <div
+            class="category-items"
+            id="categoryItems"
+        ></div>
+
+    </section>
+
+</div>
+
+
+<!-- =======================================================
+     BOTTOM NAV
+======================================================= -->
+
+<nav class="bottom-nav">
+
+
+    <button
+        class="nav-item"
+        id="menuButton"
+        type="button"
+    >
+
+        <span class="nav-icon">
+            ☰
+        </span>
+
+        <span>
+            Menu
+        </span>
+
+    </button>
+
+
+    <button
+        class="nav-item active"
+        type="button"
+    >
+
+        <span class="nav-icon">
+            ⌂
+        </span>
+
+        <span>
+            Home
+        </span>
+
+    </button>
+
+
+    <button
+        class="nav-item"
+        type="button"
+    >
+
+        <span class="nav-icon profile-nav-icon">
+            ♙
+        </span>
+
+        <span>
+            Profile
+        </span>
+
+    </button>
+
+
+</nav>
+
+
+<!-- =======================================================
+     CALENDAR PAGE
+======================================================= -->
+
+<section
+    class="calendar-page"
+    id="calendarPage"
+>
+
+    <div class="calendar-header">
+
+        <button
+            class="calendar-back"
+            id="calendarBack"
+            type="button"
+        >
+            ‹
+        </button>
+
+        <div>
+
+            <div class="calendar-title">
+                Calendar
+            </div>
+
+            <div class="calendar-subtitle">
+                June 2026
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="calendar-card">
+
+        <div class="calendar-month">
+
+            <span>
+                June
+            </span>
+
+            <strong>
+                2026
+            </strong>
+
+        </div>
+
+
+        <div class="calendar-weekdays">
+
+            <span>Sun</span>
+            <span>Mon</span>
+            <span>Tue</span>
+            <span>Wed</span>
+            <span>Thu</span>
+            <span>Fri</span>
+            <span>Sat</span>
+
+        </div>
+
+
+        <div
+            class="calendar-grid"
+            id="calendarGrid"
+        >
+
+            <button class="calendar-day muted">
+                31
+            </button>
+
+            <button class="calendar-day">1</button>
+            <button class="calendar-day">2</button>
+            <button class="calendar-day">3</button>
+            <button class="calendar-day">4</button>
+            <button class="calendar-day">5</button>
+            <button class="calendar-day">6</button>
+
+            <button class="calendar-day">7</button>
+            <button class="calendar-day">8</button>
+            <button class="calendar-day">9</button>
+            <button class="calendar-day">10</button>
+            <button class="calendar-day">11</button>
+            <button class="calendar-day">12</button>
+            <button class="calendar-day">13</button>
+
+            <button class="calendar-day">14</button>
+            <button class="calendar-day">15</button>
+            <button class="calendar-day">16</button>
+            <button class="calendar-day">17</button>
+            <button class="calendar-day">18</button>
+
+            <button
+                class="calendar-day selected"
+            >
+                19
+            </button>
+
+            <button class="calendar-day">20</button>
+
+            <button class="calendar-day">21</button>
+            <button class="calendar-day">22</button>
+            <button class="calendar-day">23</button>
+            <button class="calendar-day">24</button>
+            <button class="calendar-day">25</button>
+            <button class="calendar-day">26</button>
+            <button class="calendar-day">27</button>
+
+            <button class="calendar-day">28</button>
+            <button class="calendar-day">29</button>
+            <button class="calendar-day">30</button>
+
+            <button class="calendar-day muted">1</button>
+            <button class="calendar-day muted">2</button>
+            <button class="calendar-day muted">3</button>
+            <button class="calendar-day muted">4</button>
+
+        </div>
+
+    </div>
+
+
+    <div class="selected-date-card">
+
+        <div class="selected-date-label">
+            SELECTED DATE
+        </div>
+
+        <div
+            class="selected-date"
+            id="selectedDateText"
+        >
+            Saturday, 19 June 2026
+        </div>
+
+        <div class="calendar-live">
+
+            <span class="live-dot"></span>
+
+            <span>
+                <b>Data Structures</b>
+                · CS201
+            </span>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =======================================================
+     ATTENDANCE PAGE
+======================================================= -->
+
+<div
+    class="attendance-page"
+    id="attendancePage"
+>
+
+    <div class="attendance-page-header">
+
+        <button
+            class="attendance-page-back"
+            id="attendancePageBack"
+            type="button"
+        >
+            ‹
+        </button>
+
+        <div>
+
+            <div class="attendance-page-title">
+                Attendance
+            </div>
+
+            <div class="attendance-page-subtitle">
+                View your attendance by subject or day
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="attendance-switch">
+
+        <button
+            id="attendanceSubjectTab"
+            class="active"
+            type="button"
+        >
+            View by Subject
+        </button>
+
+        <button
+            id="attendanceDayTab"
+            type="button"
+        >
+            View by Day
+        </button>
+
+    </div>
+
+
+    <section
+        class="attendance-view"
+        id="attendanceSubjectView"
+    >
+
+        <div class="attendance-summary">
+
+            <div class="attendance-summary-card">
+
+                <div
+                    class="attendance-summary-value"
+                    id="attendanceOverall"
+                >
+                    65%
+                </div>
+
+                <div class="attendance-summary-label">
+                    OVERALL
+                </div>
+
+            </div>
+
+
+            <div class="attendance-summary-card">
+
+                <div
+                    class="attendance-summary-value"
+                    id="attendanceAttended"
+                >
+                    86
+                </div>
+
+                <div class="attendance-summary-label">
+                    ATTENDED
+                </div>
+
+            </div>
+
+
+            <div class="attendance-summary-card">
+
+                <div
+                    class="attendance-summary-value"
+                    id="attendanceDuty"
+                >
+                    5
+                </div>
+
+                <div class="attendance-summary-label">
+                    DUTY LEAVE
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="attendance-section-title">
+            Attendance by Subject
+        </div>
+
+        <div id="attendanceSubjectsList"></div>
+
+    </section>
+
+
+    <section
+        class="attendance-view hidden"
+        id="attendanceDayView"
+    >
+
+        <div class="attendance-day-card">
+
+            <div class="attendance-day-month">
+
+                <span>
+                    June
+                </span>
+
+                <strong>
+                    2026
+                </strong>
+
+            </div>
+
+
+            <div class="attendance-weekdays">
+
+                <span>MON</span>
+                <span>TUE</span>
+                <span>WED</span>
+                <span>THU</span>
+                <span>FRI</span>
+                <span>SAT</span>
+                <span>SUN</span>
+
+            </div>
+
+
+            <div
+                class="attendance-day-grid"
+                id="attendanceDayGrid"
+            ></div>
+
+        </div>
+
+
+        <div class="attendance-legend">
+
+            <div class="attendance-legend-item">
+
+                <span class="attendance-legend-dot present"></span>
+
+                Present
+
+            </div>
+
+
+            <div class="attendance-legend-item">
+
+                <span class="attendance-legend-dot absent"></span>
+
+                Absent
+
+            </div>
+
+
+            <div class="attendance-legend-item">
+
+                <span class="attendance-legend-dot duty"></span>
+
+                Duty Leave
+
+            </div>
+
+        </div>
+
+
+        <div class="attendance-day-info">
+
+            <div class="attendance-day-info-label">
+                SELECTED DAY
+            </div>
+
+            <div
+                class="attendance-day-info-date"
+                id="attendanceSelectedDay"
+            >
+                Friday, 19 June 2026
+            </div>
+
+            <div
+                class="attendance-day-info-status"
+                id="attendanceSelectedStatus"
+            >
+                Present
+            </div>
+
+        </div>
+
+
+        <div class="attendance-hourly-card">
+
+            <div class="attendance-hourly-title">
+                Hourly Attendance
+            </div>
+
+            <div
+                class="attendance-hourly-list"
+                id="attendanceHourlyList"
+            ></div>
+
+        </div>
+
+    </section>
+
+</div>
+
+
+<!-- =======================================================
+     TIMETABLE
+======================================================= -->
+
+<div
+    class="timetable-overlay"
+    id="timetableOverlay"
+>
+
+    <section class="timetable-sheet">
+
+        <div class="sheet-handle"></div>
+
+
+        <div class="timetable-header">
+
+            <div>
+
+                <div class="timetable-title">
+                    Today's Timetable
+                </div>
+
+                <div class="timetable-date">
+                    Saturday, 19 June 2026
+                </div>
+
+            </div>
+
+
+            <button
+                class="close-timetable"
+                id="closeTimetable"
+                type="button"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <div class="current-class">
+
+            <div class="current-label">
+                ● LIVE NOW
+            </div>
+
+            <div class="current-subject">
+                Data Structures
+            </div>
+
+            <div class="current-room">
+                CS201 · Room 204
+            </div>
+
+        </div>
+
+
+        <div class="timetable-list">
+
+
+            <div class="timetable-item">
+
+                <div class="time">
+                    09:00<br>10:00 AM
+                </div>
+
+                <div>
+
+                    <div class="subject-name">
+                        Mathematics
+                    </div>
+
+                    <div class="subject-code">
+                        MA201
+                    </div>
+
+                </div>
+
+                <div class="room">
+                    R-201
+                </div>
+
+            </div>
+
+
+            <div class="timetable-item current">
+
+                <div class="time">
+                    10:00<br>11:00 AM
+                </div>
+
+                <div>
+
+                    <div class="subject-name">
+                        Data Structures
+                    </div>
+
+                    <div class="subject-code">
+                        CS201
+                    </div>
+
+                </div>
+
+                <div class="room">
+                    R-204
+                </div>
+
+            </div>
+
+
+            <div class="timetable-item">
+
+                <div class="time">
+                    11:00<br>11:15 AM
+                </div>
+
+                <div>
+
+                    <div class="subject-name">
+                        Short Break
+                    </div>
+
+                    <div class="subject-code">
+                        BREAK
+                    </div>
+
+                </div>
+
+                <div class="room">
+                    —
+                </div>
+
+            </div>
+
+
+            <div class="timetable-item">
+
+                <div class="time">
+                    11:15<br>12:15 PM
+                </div>
+
+                <div>
+
+                    <div class="subject-name">
+                        Database Management
+                    </div>
+
+                    <div class="subject-code">
+                        CS202
+                    </div>
+
+                </div>
+
+                <div class="room">
+                    R-203
+                </div>
+
+            </div>
+
+
+            <div class="timetable-item">
+
+                <div class="time">
+                    12:15<br>01:15 PM
+                </div>
+
+                <div>
+
+                    <div class="subject-name">
+                        Computer Networks
+                    </div>
+
+                    <div class="subject-code">
+                        CS203
+                    </div>
+
+                </div>
+
+                <div class="room">
+                    R-205
+                </div>
+
+            </div>
+
+
+            <div class="timetable-item">
+
+                <div class="time">
+                    01:15<br>02:00 PM
+                </div>
+
+                <div>
+
+                    <div class="subject-name">
+                        Lunch Break
+                    </div>
+
+                    <div class="subject-code">
+                        BREAK
+                    </div>
+
+                </div>
+
+                <div class="room">
+                    —
+                </div>
+
+            </div>
+
+
+            <div class="timetable-item">
+
+                <div class="time">
+                    02:00<br>03:00 PM
+                </div>
+
+                <div>
+
+                    <div class="subject-name">
+                        Artificial Intelligence
+                    </div>
+
+                    <div class="subject-code">
+                        AI201
+                    </div>
+
+                </div>
+
+                <div class="room">
+                    R-301
+                </div>
+
+            </div>
+
+
+            <div class="timetable-item">
+
+                <div class="time">
+                    03:00<br>04:00 PM
+                </div>
+
+                <div>
+
+                    <div class="subject-name">
+                        AI Laboratory
+                    </div>
+
+                    <div class="subject-code">
+                        AI202L
+                    </div>
+
+                </div>
+
+                <div class="room">
+                    LAB-2
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+</div>
+
+
+<!-- =======================================================
+     EVALUATIONS PAGE
+======================================================= -->
+
+<section
+    class="evaluations-page"
+    id="evaluationsPage"
+>
+
+
+    <div class="evaluations-header">
+
+        <button
+            class="evaluations-back"
+            id="evaluationsBack"
+            type="button"
+        >
+            ‹
+        </button>
+
+
+        <div>
+
+            <div class="evaluations-title">
+                Evaluations
+            </div>
+
+            <div class="evaluations-subtitle">
+                Submit and track your assignments
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- SUMMARY -->
+
+    <div class="evaluation-summary">
+
+
+        <div class="evaluation-summary-card">
+
+            <div
+                class="evaluation-summary-value total"
+                id="evaluationTotal"
+            >
+                12
+            </div>
+
+            <div class="evaluation-summary-label">
+                TOTAL ASSIGNMENTS
+            </div>
+
+        </div>
+
+
+        <div class="evaluation-summary-card">
+
+            <div
+                class="evaluation-summary-value submitted"
+                id="evaluationSubmitted"
+            >
+                7
+            </div>
+
+            <div class="evaluation-summary-label">
+                SUBMITTED
+            </div>
+
+        </div>
+
+
+        <div class="evaluation-summary-card">
+
+            <div
+                class="evaluation-summary-value pending"
+                id="evaluationPending"
+            >
+                5
+            </div>
+
+            <div class="evaluation-summary-label">
+                NOT SUBMITTED
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+    <!-- STATUS FILTER -->
+
+    <div class="evaluation-filter-title">
+        Assignment Status
+    </div>
+
+
+    <div class="evaluation-filters">
+
+        <button
+            class="evaluation-filter active"
+            data-status-filter="all"
+            type="button"
+        >
+            All
+        </button>
+
+        <button
+            class="evaluation-filter"
+            data-status-filter="submitted"
+            type="button"
+        >
+            Submitted
+        </button>
+
+        <button
+            class="evaluation-filter"
+            data-status-filter="not-submitted"
+            type="button"
+        >
+            Not Submitted
+        </button>
+
+    </div>
+
+
+    <!-- SUBJECT FILTER -->
+
+    <div class="evaluation-filter-title">
+        Subject
+    </div>
+
+
+    <div class="evaluation-filters">
+
+        <button
+            class="evaluation-filter active"
+            data-subject-filter="all"
+            type="button"
+        >
+            All Subjects
+        </button>
+
+        <button
+            class="evaluation-filter"
+            data-subject-filter="Data Structures"
+            type="button"
+        >
+            Data Structures
+        </button>
+
+        <button
+            class="evaluation-filter"
+            data-subject-filter="Database Management"
+            type="button"
+        >
+            Database
+        </button>
+
+        <button
+            class="evaluation-filter"
+            data-subject-filter="Computer Networks"
+            type="button"
+        >
+            Networks
+        </button>
+
+        <button
+            class="evaluation-filter"
+            data-subject-filter="Mathematics"
+            type="button"
+        >
+            Mathematics
+        </button>
+
+        <button
+            class="evaluation-filter"
+            data-subject-filter="Artificial Intelligence"
+            type="button"
+        >
+            AI
+        </button>
+
+    </div>
+
+
+    <!-- ASSIGNMENT LIST -->
+
+    <div class="assignment-list-heading">
+
+        <div class="assignment-list-title">
+            Your Assignments
+        </div>
+
+        <div
+            class="assignment-count"
+            id="assignmentCount"
+        >
+            12 assignments
+        </div>
+
+    </div>
+
+
+    <div id="assignmentList"></div>
+
+
+    <div class="evaluation-notice">
+
+        <strong>
+            Submission status:
+        </strong>
+
+        Select your assignment file and press
+        <strong>Submit</strong>.
+        Submitted assignments automatically move into the
+        <strong>Submitted</strong> section.
+
+    </div>
+
+
+</section>
+
+
+</div>
+
+
+<script>
+
+/* =========================================================
+   BASIC ELEMENTS
+========================================================= */
+
+const dateButton =
+    document.getElementById("dateButton");
+
+const calendarPage =
+    document.getElementById("calendarPage");
+
+const calendarBack =
+    document.getElementById("calendarBack");
+
+const selectedDateText =
+    document.getElementById("selectedDateText");
+
+const liveSubjectButton =
+    document.getElementById("liveSubjectButton");
+
+const timetableOverlay =
+    document.getElementById("timetableOverlay");
+
+const closeTimetable =
+    document.getElementById("closeTimetable");
+
+
+/* =========================================================
+   ATTENDANCE ELEMENTS
+========================================================= */
+
+const attendanceCard =
+    document.getElementById("attendanceCard");
+
+const attendancePage =
+    document.getElementById("attendancePage");
+
+const attendancePageBack =
+    document.getElementById("attendancePageBack");
+
+const attendanceSubjectTab =
+    document.getElementById("attendanceSubjectTab");
+
+const attendanceDayTab =
+    document.getElementById("attendanceDayTab");
+
+const attendanceSubjectView =
+    document.getElementById("attendanceSubjectView");
+
+const attendanceDayView =
+    document.getElementById("attendanceDayView");
+
+const attendanceSubjectsList =
+    document.getElementById("attendanceSubjectsList");
+
+const attendanceDayGrid =
+    document.getElementById("attendanceDayGrid");
+
+const attendanceSelectedDay =
+    document.getElementById("attendanceSelectedDay");
+
+const attendanceSelectedStatus =
+    document.getElementById("attendanceSelectedStatus");
+
+const attendanceHourlyList =
+    document.getElementById("attendanceHourlyList");
+
+
+/* =========================================================
+   MENU ELEMENTS
+========================================================= */
+
+const menuButton =
+    document.getElementById("menuButton");
+
+const menuPanelOverlay =
+    document.getElementById("menuPanelOverlay");
+
+const categorySheetOverlay =
+    document.getElementById("categorySheetOverlay");
+
+const categorySheetTitle =
+    document.getElementById("categorySheetTitle");
+
+const categoryItems =
+    document.getElementById("categoryItems");
+
+
+/* =========================================================
+   EVALUATIONS ELEMENTS
+========================================================= */
+
+const evaluationsPage =
+    document.getElementById("evaluationsPage");
+
+const evaluationsBack =
+    document.getElementById("evaluationsBack");
+
+const assignmentList =
+    document.getElementById("assignmentList");
+
+const assignmentCount =
+    document.getElementById("assignmentCount");
+
+const evaluationTotal =
+    document.getElementById("evaluationTotal");
+
+const evaluationSubmitted =
+    document.getElementById("evaluationSubmitted");
+
+const evaluationPending =
+    document.getElementById("evaluationPending");
+
+
+/* =========================================================
+   SUBJECT ATTENDANCE DATA
+========================================================= */
+
+const attendanceSubjects = [
+
+    {
+        name: "Data Structures",
+        code: "CS201",
+        attended: 18,
+        total: 22,
+        duty: 1
+    },
+
+    {
+        name: "Database Management",
+        code: "CS202",
+        attended: 16,
+        total: 20,
+        duty: 0
+    },
+
+    {
+        name: "Computer Networks",
+        code: "CS203",
+        attended: 14,
+        total: 21,
+        duty: 2
+    },
+
+    {
+        name: "Mathematics",
+        code: "MA201",
+        attended: 17,
+        total: 20,
+        duty: 1
+    },
+
+    {
+        name: "Artificial Intelligence",
+        code: "AI201",
+        attended: 13,
+        total: 18,
+        duty: 0
+    },
+
+    {
+        name: "AI Laboratory",
+        code: "AI202L",
+        attended: 8,
+        total: 10,
+        duty: 1
+    }
+
+];
+
+
+/* =========================================================
+   DAILY ATTENDANCE
+========================================================= */
+
+const attendanceDays = {
+
+    1: "present",
+    2: "present",
+    3: "absent",
+    4: "present",
+    5: "present",
+    6: "no-class",
+    7: "no-class",
+    8: "present",
+    9: "duty",
+    10: "present",
+    11: "absent",
+    12: "present",
+    13: "no-class",
+    14: "no-class",
+    15: "present",
+    16: "present",
+    17: "absent",
+    18: "present",
+    19: "present",
+    20: "no-class",
+    21: "no-class",
+    22: "present",
+    23: "present",
+    24: "duty",
+    25: "present",
+    26: "absent",
+    27: "no-class",
+    28: "no-class",
+    29: "present",
+    30: "present"
+
+};
+
+
+/* =========================================================
+   HOURLY ATTENDANCE SCHEDULE
+========================================================= */
+
+const attendanceHourlySchedule = [
+
+    {
+        time: "09:00–10:00",
+        name: "Mathematics",
+        code: "MA201"
+    },
+
+    {
+        time: "10:00–11:00",
+        name: "Data Structures",
+        code: "CS201"
+    },
+
+    {
+        time: "11:00–11:15",
+        name: "Short Break",
+        code: "BREAK"
+    },
+
+    {
+        time: "11:15–12:15",
+        name: "Database Management",
+        code: "CS202"
+    },
+
+    {
+        time: "12:15–01:15",
+        name: "Computer Networks",
+        code: "CS203"
+    },
+
+    {
+        time: "01:15–02:00",
+        name: "Lunch Break",
+        code: "BREAK"
+    },
+
+    {
+        time: "02:00–03:00",
+        name: "Artificial Intelligence",
+        code: "AI201"
+    },
+
+    {
+        time: "03:00–04:00",
+        name: "AI Laboratory",
+        code: "AI202L"
+    }
+
+];
+
+
+const attendanceHourlyStatuses = {
+
+    1:["present","present","no-class","present","absent","no-class","present","present"],
+    2:["present","present","no-class","present","present","no-class","present","absent"],
+    3:["absent","present","no-class","absent","present","no-class","absent","present"],
+    4:["present","present","no-class","present","present","no-class","present","present"],
+    5:["present","absent","no-class","present","present","no-class","present","present"],
+
+    6:["no-class","no-class","no-class","no-class","no-class","no-class","no-class","no-class"],
+    7:["no-class","no-class","no-class","no-class","no-class","no-class","no-class","no-class"],
+
+    8:["present","present","no-class","present","present","no-class","absent","present"],
+    9:["present","duty","no-class","present","duty","no-class","present","present"],
+    10:["present","present","no-class","absent","present","no-class","present","present"],
+    11:["absent","absent","no-class","present","absent","no-class","present","absent"],
+    12:["present","present","no-class","present","present","no-class","present","present"],
+
+    13:["no-class","no-class","no-class","no-class","no-class","no-class","no-class","no-class"],
+    14:["no-class","no-class","no-class","no-class","no-class","no-class","no-class","no-class"],
+
+    15:["present","present","no-class","present","absent","no-class","present","present"],
+    16:["present","present","no-class","present","present","no-class","present","duty"],
+    17:["absent","present","no-class","absent","present","no-class","absent","present"],
+    18:["present","present","no-class","present","present","no-class","present","present"],
+    19:["present","present","no-class","absent","present","no-class","duty","present"],
+
+    20:["no-class","no-class","no-class","no-class","no-class","no-class","no-class","no-class"],
+    21:["no-class","no-class","no-class","no-class","no-class","no-class","no-class","no-class"],
+
+    22:["present","present","no-class","present","present","no-class","present","present"],
+    23:["present","absent","no-class","present","present","no-class","present","present"],
+    24:["duty","present","no-class","duty","present","no-class","present","duty"],
+    25:["present","present","no-class","present","absent","no-class","present","present"],
+    26:["absent","absent","no-class","present","absent","no-class","present","absent"],
+
+    27:["no-class","no-class","no-class","no-class","no-class","no-class","no-class","no-class"],
+    28:["no-class","no-class","no-class","no-class","no-class","no-class","no-class","no-class"],
+
+    29:["present","present","no-class","present","present","no-class","present","present"],
+    30:["present","present","no-class","present","present","no-class","present","present"]
+
+};
+
+
+/* =========================================================
+   OPEN / CLOSE ATTENDANCE
+========================================================= */
+
+function openAttendance() {
+
+    attendancePage.classList.add("open");
+
+}
+
+function closeAttendance() {
+
+    attendancePage.classList.remove("open");
+
+}
+
+attendanceCard.addEventListener(
+    "click",
+    openAttendance
+);
+
+attendanceCard.addEventListener(
+    "keydown",
+    function(event) {
+
+        if (
+            event.key === "Enter" ||
+            event.key === " "
+        ) {
+
+            event.preventDefault();
+
+            openAttendance();
+
+        }
+
+    }
+);
+
+attendancePageBack.addEventListener(
+    "click",
+    closeAttendance
+);
+
+
+/* =========================================================
+   ATTENDANCE SUBJECTS
+========================================================= */
+
+function renderAttendanceSubjects() {
+
+    attendanceSubjectsList.innerHTML = "";
+
+    let totalAttended = 0;
+
+    let totalClasses = 0;
+
+    let totalDuty = 0;
+
+
+    attendanceSubjects.forEach(
+        function(subject) {
+
+            const percentage =
+                Math.round(
+                    subject.attended /
+                    subject.total *
+                    100
+                );
+
+
+            totalAttended +=
+                subject.attended;
+
+            totalClasses +=
+                subject.total;
+
+            totalDuty +=
+                subject.duty;
+
+
+            const card =
+                document.createElement("div");
+
+
+            card.className =
+                "attendance-subject-card";
+
+
+            card.innerHTML = `
+
+                <div class="attendance-subject-top">
+
+                    <div>
+
+                        <div class="attendance-subject-name">
+                            ${subject.name}
+                        </div>
+
+                        <div class="attendance-subject-code">
+                            ${subject.code}
+                        </div>
+
+                    </div>
+
+                    <div class="attendance-subject-percent">
+                        ${percentage}%
+                    </div>
+
+                </div>
+
+
+                <div class="attendance-progress">
+
+                    <span
+                        style="width:${percentage}%"
+                    ></span>
+
+                </div>
+
+
+                <div class="attendance-subject-details">
+
+                    <div class="attendance-detail">
+
+                        <strong>
+                            ${subject.attended}/${subject.total}
+                        </strong>
+
+                        <span>
+                            ATTENDED
+                        </span>
+
+                    </div>
+
+
+                    <div class="attendance-detail">
+
+                        <strong>
+                            ${subject.total - subject.attended}
+                        </strong>
+
+                        <span>
+                            ABSENT
+                        </span>
+
+                    </div>
+
+
+                    <div class="attendance-detail">
+
+                        <strong>
+                            ${subject.duty}
+                        </strong>
+
+                        <span>
+                            DUTY LEAVE
+                        </span>
+
+                    </div>
+
+                </div>
+
+            `;
+
+
+            attendanceSubjectsList.appendChild(card);
+
+        }
+    );
+
+
+    const overall =
+        Math.round(
+            totalAttended /
+            totalClasses *
+            100
+        );
+
+
+    document.getElementById(
+        "attendanceOverall"
+    ).textContent =
+        overall + "%";
+
+
+    document.getElementById(
+        "attendanceAttended"
+    ).textContent =
+        totalAttended;
+
+
+    document.getElementById(
+        "attendanceDuty"
+    ).textContent =
+        totalDuty;
+
+}
+
+
+function showSubjectView() {
+
+    attendanceSubjectTab.classList.add(
+        "active"
+    );
+
+    attendanceDayTab.classList.remove(
+        "active"
+    );
+
+    attendanceSubjectView.classList.remove(
+        "hidden"
+    );
+
+    attendanceDayView.classList.add(
+        "hidden"
+    );
+
+}
+
+
+function showDayView() {
+
+    attendanceDayTab.classList.add(
+        "active"
+    );
+
+    attendanceSubjectTab.classList.remove(
+        "active"
+    );
+
+    attendanceDayView.classList.remove(
+        "hidden"
+    );
+
+    attendanceSubjectView.classList.add(
+        "hidden"
+    );
+
+}
+
+
+attendanceSubjectTab.addEventListener(
+    "click",
+    showSubjectView
+);
+
+attendanceDayTab.addEventListener(
+    "click",
+    showDayView
+);
+
+
+/* =========================================================
+   ATTENDANCE STATUS
+========================================================= */
+
+function getAttendanceStatusText(status) {
+
+    if (status === "present") {
+
+        return "Present";
+
+    }
+
+    if (status === "absent") {
+
+        return "Absent";
+
+    }
+
+    if (status === "duty") {
+
+        return "Duty Leave";
+
+    }
+
+    return "No Class";
+
+}
+
+
+function renderAttendanceHours(day) {
+
+    attendanceHourlyList.innerHTML = "";
+
+
+    const statuses =
+        attendanceHourlyStatuses[day] ||
+        attendanceHourlySchedule.map(
+            function() {
+                return "no-class";
+            }
+        );
+
+
+    attendanceHourlySchedule.forEach(
+        function(item,index) {
+
+            const status =
+                statuses[index] ||
+                "no-class";
+
+
+            const row =
+                document.createElement("div");
+
+
+            row.className =
+                "attendance-hourly-item";
+
+
+            row.innerHTML = `
+
+                <div class="attendance-hourly-time">
+                    ${item.time}
+                </div>
+
+                <div>
+
+                    <div class="attendance-hourly-subject">
+                        ${item.name}
+                    </div>
+
+                    <div class="attendance-hourly-code">
+                        ${item.code}
+                    </div>
+
+                </div>
+
+                <div
+                    class="attendance-hourly-status ${status}"
+                >
+                    ${getAttendanceStatusText(status)}
+                </div>
+
+            `;
+
+
+            attendanceHourlyList.appendChild(
+                row
+            );
+
+        }
+    );
+
+}
+
+
+function selectAttendanceDay(day) {
+
+    const date =
+        new Date(
+            2026,
+            5,
+            day
+        );
+
+
+    const formatted =
+        date.toLocaleDateString(
+            "en-US",
+            {
+                weekday: "long",
+                day: "numeric",
+                month: "long",
+                year: "numeric"
+            }
+        );
+
+
+    const status =
+        attendanceDays[day] ||
+        "no-class";
+
+
+    attendanceSelectedDay.textContent =
+        formatted;
+
+
+    attendanceSelectedStatus.textContent =
+        getAttendanceStatusText(
+            status
+        );
+
+
+    renderAttendanceHours(day);
+
+
+    document
+        .querySelectorAll(".attendance-day")
+        .forEach(
+            function(item) {
+
+                item.classList.remove(
+                    "selected"
+                );
+
+            }
+        );
+
+
+    const selected =
+        document.querySelector(
+            '.attendance-day[data-day="' +
+            day +
+            '"]'
+        );
+
+
+    if (selected) {
+
+        selected.classList.add(
+            "selected"
+        );
+
+    }
+
+}
+
+
+function renderAttendanceCalendar() {
+
+    attendanceDayGrid.innerHTML = "";
+
+
+    for (
+        let day = 1;
+        day <= 30;
+        day++
+    ) {
+
+        const status =
+            attendanceDays[day] ||
+            "no-class";
+
+
+        const button =
+            document.createElement(
+                "button"
+            );
+
+
+        button.type =
+            "button";
+
+
+        button.className =
+            "attendance-day " +
+            status;
+
+
+        button.dataset.day =
+            day;
+
+
+        button.innerHTML = `
+
+            <span>
+                ${day}
+            </span>
+
+            <span class="attendance-mark"></span>
+
+        `;
+
+
+        button.addEventListener(
+            "click",
+            function() {
+
+                selectAttendanceDay(
+                    day
+                );
+
+            }
+        );
+
+
+        attendanceDayGrid.appendChild(
+            button
+        );
+
+    }
+
+
+    selectAttendanceDay(19);
+
+}
+
+
+/* =========================================================
+   CALENDAR
+========================================================= */
+
+function openCalendar() {
+
+    calendarPage.classList.add("open");
+
+}
+
+function closeCalendar() {
+
+    calendarPage.classList.remove("open");
+
+}
+
+dateButton.addEventListener(
+    "click",
+    openCalendar
+);
+
+calendarBack.addEventListener(
+    "click",
+    closeCalendar
+);
+
+
+document
+    .querySelectorAll(".calendar-day")
+    .forEach(
+        function(day,index) {
+
+            day.addEventListener(
+                "click",
+                function() {
+
+                    document
+                        .querySelectorAll(".calendar-day")
+                        .forEach(
+                            function(item) {
+
+                                item.classList.remove(
+                                    "selected"
+                                );
+
+                            }
+                        );
+
+
+                    day.classList.add(
+                        "selected"
+                    );
+
+
+                    const number =
+                        day.textContent.trim();
+
+
+                    if (
+                        !day.classList.contains(
+                            "muted"
+                        )
+                    ) {
+
+                        const date =
+                            new Date(
+                                2026,
+                                5,
+                                Number(number)
+                            );
+
+
+                        selectedDateText.textContent =
+                            date.toLocaleDateString(
+                                "en-US",
+                                {
+                                    weekday: "long",
+                                    day: "numeric",
+                                    month: "long",
+                                    year: "numeric"
+                                }
+                            );
+
+                    }
+
+                }
+            );
+
+        }
+    );
+
+
+/* =========================================================
+   TIMETABLE
+========================================================= */
+
+function openTimetable() {
+
+    timetableOverlay.classList.add(
+        "open"
+    );
+
+}
+
+function closeTimetableSheet() {
+
+    timetableOverlay.classList.remove(
+        "open"
+    );
+
+}
+
+liveSubjectButton.addEventListener(
+    "click",
+    openTimetable
+);
+
+closeTimetable.addEventListener(
+    "click",
+    closeTimetableSheet
+);
+
+timetableOverlay.addEventListener(
+    "click",
+    function(event) {
+
+        if (
+            event.target ===
+            timetableOverlay
+        ) {
+
+            closeTimetableSheet();
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   MENU
+========================================================= */
+
+const categoryOptions = {
+
+    Academics: [
+
+        "Evaluations",
+        "Results",
+        "Study Materials",
+        "Courses",
+        "Faculties",
+        "Question Bank",
+        "Analysis",
+        "Laboratory",
+        "Exam Schedule",
+        "Exams or Quiz",
+        "Video Lectures"
+
+    ],
+
+    Fees: [
+
+        "Academics",
+        "Transport",
+        "Hostel",
+        "Dues"
+
+    ],
+
+    Information: [
+
+        "Online Classes",
+        "Circular",
+        "Program Outcome",
+        "Survey",
+        "Library",
+        "Remarks",
+        "Downloads"
+
+    ],
+
+    Office: [
+
+        "Semester Registration",
+        "Counseling",
+        "Certificate Requirement",
+        "Leave",
+        "Grievance",
+        "Activity Point",
+        "Subject Registration",
+        "Stationery",
+        "Digital Library"
+
+    ],
+
+    Placements: [
+
+        "Placements",
+        "Internships"
+
+    ]
+
+};
+
+
+function openMenuPanel() {
+
+    menuPanelOverlay.classList.add(
+        "open"
+    );
+
+}
+
+
+function closeMenuPanel() {
+
+    menuPanelOverlay.classList.remove(
+        "open"
+    );
+
+}
+
+
+function openCategorySheet(
+    category
+) {
+
+    const items =
+        categoryOptions[category] ||
+        [];
+
+
+    categorySheetTitle.textContent =
+        category;
+
+
+    categoryItems.innerHTML =
+        "";
+
+
+    items.forEach(
+        function(item) {
+
+            const button =
+                document.createElement(
+                    "button"
+                );
+
+
+            button.type =
+                "button";
+
+
+            button.className =
+                "category-item";
+
+
+            button.textContent =
+                item;
+
+
+            /*
+             * IMPORTANT:
+             * Evaluations gets its own page.
+             */
+
+            if (
+                category === "Academics" &&
+                item === "Evaluations"
+            ) {
+
+                button.addEventListener(
+                    "click",
+                    function() {
+
+                        closeCategorySheet();
+
+                        openEvaluations();
+
+                    }
+                );
+
+            }
+
+
+            categoryItems.appendChild(
+                button
+            );
+
+        }
+    );
+
+
+    closeMenuPanel();
+
+
+    categorySheetOverlay.classList.add(
+        "open"
+    );
+
+}
+
+
+function closeCategorySheet() {
+
+    categorySheetOverlay.classList.remove(
+        "open"
+    );
+
+}
+
+
+menuButton.addEventListener(
+    "click",
+    openMenuPanel
+);
+
+
+document
+    .querySelectorAll(
+        ".menu-category-button"
+    )
+    .forEach(
+        function(button) {
+
+            button.addEventListener(
+                "click",
+                function() {
+
+                    openCategorySheet(
+                        button.dataset.category
+                    );
+
+                }
+            );
+
+        }
+    );
+
+
+document
+    .querySelectorAll(
+        "[data-quick-category]"
+    )
+    .forEach(
+        function(box) {
+
+            box.addEventListener(
+                "click",
+                function() {
+
+                    openCategorySheet(
+                        box.dataset.quickCategory
+                    );
+
+                }
+            );
+
+        }
+    );
+
+
+menuPanelOverlay.addEventListener(
+    "click",
+    function(event) {
+
+        if (
+            event.target ===
+            menuPanelOverlay
+        ) {
+
+            closeMenuPanel();
+
+        }
+
+    }
+);
+
+
+categorySheetOverlay.addEventListener(
+    "click",
+    function(event) {
+
+        if (
+            event.target ===
+            categorySheetOverlay
+        ) {
+
+            closeCategorySheet();
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   =========================================================
+   EVALUATIONS
+   =========================================================
+========================================================= */
+
+
+/*
+ * Each assignment has:
+ *
+ * id
+ * subject
+ * code
+ * title
+ * due
+ * status
+ *
+ * status:
+ * submitted
+ * not-submitted
+ */
+
+const assignments = [
+
+    {
+        id: 1,
+        subject: "Data Structures",
+        code: "CS201",
+        title: "Stack and Queue Implementation",
+        due: "18 June 2026",
+        status: "submitted",
+        file: "stack_queue.pdf"
+    },
+
+    {
+        id: 2,
+        subject: "Data Structures",
+        code: "CS201",
+        title: "Linked List Operations",
+        due: "23 June 2026",
+        status: "not-submitted",
+        file: ""
+    },
+
+    {
+        id: 3,
+        subject: "Database Management",
+        code: "CS202",
+        title: "SQL Query Assignment",
+        due: "20 June 2026",
+        status: "submitted",
+        file: "sql_queries.pdf"
+    },
+
+    {
+        id: 4,
+        subject: "Database Management",
+        code: "CS202",
+        title: "ER Diagram and Normalization",
+        due: "25 June 2026",
+        status: "not-submitted",
+        file: ""
+    },
+
+    {
+        id: 5,
+        subject: "Computer Networks",
+        code: "CS203",
+        title: "OSI Model Assignment",
+        due: "19 June 2026",
+        status: "submitted",
+        file: "osi_model.pdf"
+    },
+
+    {
+        id: 6,
+        subject: "Computer Networks",
+        code: "CS203",
+        title: "TCP and UDP Comparison",
+        due: "27 June 2026",
+        status: "not-submitted",
+        file: ""
+    },
+
+    {
+        id: 7,
+        subject: "Mathematics",
+        code: "MA201",
+        title: "Probability Problems",
+        due: "21 June 2026",
+        status: "submitted",
+        file: "probability.pdf"
+    },
+
+    {
+        id: 8,
+        subject: "Mathematics",
+        code: "MA201",
+        title: "Linear Algebra Worksheet",
+        due: "28 June 2026",
+        status: "not-submitted",
+        file: ""
+    },
+
+    {
+        id: 9,
+        subject: "Artificial Intelligence",
+        code: "AI201",
+        title: "Search Algorithms",
+        due: "22 June 2026",
+        status: "submitted",
+        file: "search_algorithms.pdf"
+    },
+
+    {
+        id: 10,
+        subject: "Artificial Intelligence",
+        code: "AI201",
+        title: "Knowledge Representation",
+        due: "26 June 2026",
+        status: "submitted",
+        file: "knowledge_representation.pdf"
+    },
+
+    {
+        id: 11,
+        subject: "Artificial Intelligence",
+        code: "AI201",
+        title: "Machine Learning Basics",
+        due: "30 June 2026",
+        status: "not-submitted",
+        file: ""
+    },
+
+    {
+        id: 12,
+        subject: "AI Laboratory",
+        code: "AI202L",
+        title: "Python AI Practical",
+        due: "29 June 2026",
+        status: "submitted",
+        file: "ai_practical.pdf"
+    }
+
+];
+
+
+/* =========================================================
+   CURRENT FILTERS
+========================================================= */
+
+let currentStatusFilter = "all";
+
+let currentSubjectFilter = "all";
+
+
+/* =========================================================
+   OPEN EVALUATIONS
+========================================================= */
+
+function openEvaluations() {
+
+    evaluationsPage.classList.add(
+        "open"
+    );
+
+    renderAssignments();
+
+}
+
+
+/* =========================================================
+   CLOSE EVALUATIONS
+========================================================= */
+
+function closeEvaluations() {
+
+    evaluationsPage.classList.remove(
+        "open"
+    );
+
+}
+
+
+evaluationsBack.addEventListener(
+    "click",
+    closeEvaluations
+);
+
+
+/* =========================================================
+   UPDATE EVALUATION SUMMARY
+========================================================= */
+
+function updateEvaluationSummary() {
+
+    const total =
+        assignments.length;
+
+
+    const submitted =
+        assignments.filter(
+            function(item) {
+
+                return item.status ===
+                    "submitted";
+
+            }
+        ).length;
+
+
+    const pending =
+        total - submitted;
+
+
+    evaluationTotal.textContent =
+        total;
+
+
+    evaluationSubmitted.textContent =
+        submitted;
+
+
+    evaluationPending.textContent =
+        pending;
+
+}
+
+
+/* =========================================================
+   GET FILTERED ASSIGNMENTS
+========================================================= */
+
+function getFilteredAssignments() {
+
+    return assignments.filter(
+        function(item) {
+
+            const matchesStatus =
+                currentStatusFilter === "all" ||
+                item.status ===
+                    currentStatusFilter;
+
+
+            const matchesSubject =
+                currentSubjectFilter === "all" ||
+                item.subject ===
+                    currentSubjectFilter;
+
+
+            return (
+                matchesStatus &&
+                matchesSubject
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   RENDER ASSIGNMENTS
+========================================================= */
+
+function renderAssignments() {
+
+    assignmentList.innerHTML = "";
+
+
+    const filtered =
+        getFilteredAssignments();
+
+
+    assignmentCount.textContent =
+        filtered.length +
+        (
+            filtered.length === 1
+                ? " assignment"
+                : " assignments"
+        );
+
+
+    updateEvaluationSummary();
+
+
+    if (
+        filtered.length === 0
+    ) {
+
+        assignmentList.innerHTML = `
+
+            <div class="assignment-empty">
+
+                <div class="assignment-empty-icon">
+                    ✓
+                </div>
+
+                <div class="assignment-empty-title">
+                    No assignments found
+                </div>
+
+                <div class="assignment-empty-text">
+                    There are no assignments matching
+                    the selected filters.
+                </div>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    filtered.forEach(
+        function(assignment) {
+
+            const card =
+                document.createElement("div");
+
+
+            card.className =
+                "assignment-card";
+
+
+            const isSubmitted =
+                assignment.status ===
+                "submitted";
+
+
+            card.innerHTML = `
+
+                <div class="assignment-top">
+
+                    <div class="assignment-main">
+
+                        <div class="assignment-subject">
+                            ${assignment.subject}
+                        </div>
+
+                        <div class="assignment-name">
+                            ${assignment.title}
+                        </div>
+
+                        <div class="assignment-code">
+                            ${assignment.code}
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        class="assignment-status ${
+                            isSubmitted
+                                ? "submitted"
+                                : "not-submitted"
+                        }"
+                    >
+
+                        ${
+                            isSubmitted
+                                ? "SUBMITTED"
+                                : "NOT SUBMITTED"
+                        }
+
+                    </div>
+
+                </div>
+
+
+                <div class="assignment-details">
+
+                    <div class="assignment-due">
+
+                        Due:
+                        <strong>
+                            ${assignment.due}
+                        </strong>
+
+                    </div>
+
+
+                    <div
+                        class="assignment-file-name"
+                        id="file-name-${assignment.id}"
+                    >
+
+                        ${
+                            assignment.file
+                                ? assignment.file
+                                : "No file selected"
+                        }
+
+                    </div>
+
+                </div>
+
+
+                <div class="assignment-actions">
+
+                    <label class="assignment-upload">
+
+                        Choose File
+
+                        <input
+                            type="file"
+                            data-file-id="${assignment.id}"
+                            accept=".pdf,.doc,.docx,.ppt,.pptx,.txt,.zip,.jpg,.jpeg,.png"
+                        >
+
+                    </label>
+
+
+                    <button
+                        class="assignment-submit"
+                        type="button"
+                        data-submit-id="${assignment.id}"
+                        ${
+                            isSubmitted
+                                ? "disabled"
+                                : ""
+                        }
+                    >
+
+                        ${
+                            isSubmitted
+                                ? "Submitted"
+                                : "Submit"
+                        }
+
+                    </button>
+
+                </div>
+
+            `;
+
+
+            assignmentList.appendChild(
+                card
+            );
+
+
+            /* ---------------------------------------------
+               FILE SELECT
+            --------------------------------------------- */
+
+            const fileInput =
+                card.querySelector(
+                    '[data-file-id="' +
+                    assignment.id +
+                    '"]'
+                );
+
+
+            fileInput.addEventListener(
+                "change",
+                function(event) {
+
+                    const file =
+                        event.target.files[0];
+
+
+                    if (!file) {
+
+                        return;
+
+                    }
+
+
+                    const fileName =
+                        document.getElementById(
+                            "file-name-" +
+                            assignment.id
+                        );
+
+
+                    if (fileName) {
+
+                        fileName.textContent =
+                            file.name;
+
+                    }
+
+                }
+            );
+
+
+            /* ---------------------------------------------
+               SUBMIT
+            --------------------------------------------- */
+
+            const submitButton =
+                card.querySelector(
+                    '[data-submit-id="' +
+                    assignment.id +
+                    '"]'
+                );
+
+
+            submitButton.addEventListener(
+                "click",
+                function() {
+
+                    const file =
+                        fileInput.files[0];
+
+
+                    /*
+                     * For a new submission,
+                     * require a file.
+                     */
+
+                    if (
+                        !isSubmitted &&
+                        !file &&
+                        !assignment.file
+                    ) {
+
+                        alert(
+                            "Please choose an assignment file before submitting."
+                        );
+
+                        return;
+
+                    }
+
+
+                    assignment.status =
+                        "submitted";
+
+
+                    if (file) {
+
+                        assignment.file =
+                            file.name;
+
+                    }
+
+
+                    renderAssignments();
+
+                }
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   STATUS FILTER BUTTONS
+========================================================= */
+
+document
+    .querySelectorAll(
+        "[data-status-filter]"
+    )
+    .forEach(
+        function(button) {
+
+            button.addEventListener(
+                "click",
+                function() {
+
+                    currentStatusFilter =
+                        button.dataset.statusFilter;
+
+
+                    document
+                        .querySelectorAll(
+                            "[data-status-filter]"
+                        )
+                        .forEach(
+                            function(item) {
+
+                                item.classList.remove(
+                                    "active"
+                                );
+
+                            }
+                        );
+
+
+                    button.classList.add(
+                        "active"
+                    );
+
+
+                    renderAssignments();
+
+                }
+            );
+
+        }
+    );
+
+
+/* =========================================================
+   SUBJECT FILTER BUTTONS
+========================================================= */
+
+document
+    .querySelectorAll(
+        "[data-subject-filter]"
+    )
+    .forEach(
+        function(button) {
+
+            button.addEventListener(
+                "click",
+                function() {
+
+                    currentSubjectFilter =
+                        button.dataset.subjectFilter;
+
+
+                    document
+                        .querySelectorAll(
+                            "[data-subject-filter]"
+                        )
+                        .forEach(
+                            function(item) {
+
+                                item.classList.remove(
+                                    "active"
+                                );
+
+                            }
+                        );
+
+
+                    button.classList.add(
+                        "active"
+                    );
+
+
+                    renderAssignments();
+
+                }
+            );
+
+        }
+    );
+
+
+/* =========================================================
+   INITIAL RENDER
+========================================================= */
+
+renderAttendanceSubjects();
+
+renderAttendanceCalendar();
+
+renderAssignments();
+
+
+/* =========================================================
+   ESCAPE KEY
+========================================================= */
+
+document.addEventListener(
+    "keydown",
+    function(event) {
+
+        if (
+            event.key !== "Escape"
+        ) {
+
+            return;
+
+        }
+
+
+        if (
+            evaluationsPage.classList.contains(
+                "open"
+            )
+        ) {
+
+            closeEvaluations();
+
+            return;
+
+        }
+
+
+        if (
+            timetableOverlay.classList.contains(
+                "open"
+            )
+        ) {
+
+            closeTimetableSheet();
+
+            return;
+
+        }
+
+
+        if (
+            attendancePage.classList.contains(
+                "open"
+            )
+        ) {
+
+            closeAttendance();
+
+            return;
+
+        }
+
+
+        if (
+            categorySheetOverlay.classList.contains(
+                "open"
+            )
+        ) {
+
+            closeCategorySheet();
+
+            return;
+
+        }
+
+
+        if (
+            menuPanelOverlay.classList.contains(
+                "open"
+            )
+        ) {
+
+            closeMenuPanel();
+
+            return;
+
+        }
+
+
+        if (
+            calendarPage.classList.contains(
+                "open"
+            )
+        ) {
+
+            closeCalendar();
+
+        }
+
+    }
+);
+
+</script>
+
+</body>
+</html>
